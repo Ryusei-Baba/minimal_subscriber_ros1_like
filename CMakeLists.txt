@@ -32,4 +32,30 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
+find_package(rclcpp REQUIRED)
+find_package(example_interfaces REQUIRED)
+
+add_executable(callback_subscriber_test
+  src/callback_main.cpp
+)
+ament_target_dependencies(callback_subscriber_test
+  rclcpp
+  example_interfaces
+)
+
+add_executable(lambda_subscriber_test
+  src/lambda_main.cpp
+)
+ament_target_dependencies(lambda_subscriber_test
+  rclcpp
+  example_interfaces
+)
+
+install(TARGETS
+  callback_subscriber_test
+  lambda_subscriber_test
+  #DESTINATION lib/${PROJECT_NAME}
+  DESTINATION lib/minimal_subscriber_ros1_like
+)
+
 ament_package()
